@@ -1,0 +1,16 @@
+---
+title:
+- type: main
+  text: The Yii Book
+- type: edition
+  text: 2
+creator:
+- role: author
+  text: Larry Ullman
+rights: © 2024 Larry Ullman
+ibooks:
+  version: 2.0
+date: 2024-11-23
+cover-image: src/YiiBookCover2ed.png
+graphics: yes
+---

@@ -1,0 +1,328 @@
+\documentclass[11pt,$if(lang)$$lang$,$endif$oneside]{book}
+% Added "oneside" in above to get rid of blank pages between chapters (LEU)
+\usepackage[usenames,dvipsnames]{xcolor}
+
+% For boxes around tips and such (LEU):
+\usepackage{framed}
+\usepackage{mdframed}
+
+% CAUSING PROBLEMS! (LEU)
+\usepackage{tcolorbox}
+\usepackage{color}
+%\PassOptionsToPackage{svgnames}{xcolor}
+\usepackage{listings}
+\tcbuselibrary{listings}
+%Default box size (LEU):
+\tcbset {
+	fonttitle=\bfseries,width=\linewidth-.5in,lefttitle=.5in,enlarge left by=.25in
+}
+
+% Fix for pandoc (LEU)
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% For colors of new, tips, notes, and warnings (LEU):
+\colorlet{myNew}{Green!15}
+\colorlet{myNewBorder}{Green!40!black}
+\colorlet{myTip}{Cerulean!15}
+\colorlet{myTipBorder}{Cerulean!40!black}
+\colorlet{myNote}{Goldenrod!15}
+\colorlet{myNoteBorder}{Goldenrod!40!black}
+\colorlet{myWarning}{Mahogany!15}
+\colorlet{myWarningBorder}{Mahogany!40!black}
+
+% For formatting shading:
+\definecolor{shadecolor}{gray}{0.95}
+
+% Format the captions:
+\usepackage[hang,small,bf]{caption}
+\captionsetup[figure]{labelfont=bf,textfont=it,margin=.5in,font=small}
+%\renewcommand{\figurename}{Fig.}
+
+% Set hyphenation of http://www.example.com (LEU):
+%\hyphenation{example-.com}
+\usepackage[T1]{fontenc}
+% \usepackage{lmodern}
+\usepackage{palatino} % Change the base font (LEU)
+\usepackage{upquote} % For straightening quotes in code (LEU)
+
+% For something (LEU):
+\usepackage{longtable}
+
+% For smaller headers (LEU):
+\usepackage{fancyhdr, blindtext}
+\newcommand{\changefont}{%
+	\fontsize{9}{11}\selectfont
+}
+\fancyhf{}
+% \fancyhead[LE,RO]{\changefont \slshape \rightmark} %section
+\fancyhead[RE,LO]{\changefont \slshape \leftmark} %chapter
+\fancyfoot[C]{\changefont \thepage} %footer
+\pagestyle{fancy}
+
+
+\usepackage{amssymb,amsmath}
+
+% Added by LEU to set margins:
+\usepackage[hmargin=1.5in,vmargin=1.25in]{geometry}
+% Reduce the top margin by half an inch for headers (LEU):
+%\addtolength{\topmargin}{-.5in}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+$if(euro)$
+  \usepackage{eurosym}
+$endif$
+\else % if luatex or xelatex
+  \usepackage{fontspec}
+  \ifxetex
+    \usepackage{xltxtra,xunicode}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+$if(mainfont)$
+    \setmainfont{$mainfont$}
+$endif$
+$if(sansfont)$
+    \setsansfont{$sansfont$}
+$endif$
+$if(monofont)$
+    \setmonofont{$monofont$}
+$endif$
+$if(mathfont)$
+    \setmathfont{$mathfont$}
+$endif$
+\fi
+$if(geometry)$
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$endif$
+$if(natbib)$
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+$endif$
+$if(biblatex)$
+\usepackage{biblatex}
+$if(biblio-files)$
+\bibliography{$biblio-files$}
+$endif$
+$endif$
+$if(lhs)$
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+$endif$
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+$endif$
+$if(fancy-enums)$
+% Redefine labelwidth for lists; otherwise, the enumerate package will cause
+% markers to extend beyond the left margin.
+\makeatletter\AtBeginDocument{%
+  \renewcommand{\@listi}
+    {\setlength{\labelwidth}{4em}}
+}\makeatother
+\usepackage{enumerate}
+$endif$
+$if(tables)$
+\usepackage{ctable}
+\usepackage{float} % provides the H option for float placement
+$endif$
+
+$if(graphics)$
+\usepackage{graphicx}
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
+$endif$
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={Larry Ullman},
+            pdftitle={The Yii Book},
+            colorlinks=true,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
+            pdfborder={0 0 0}}
+$if(links-as-notes)$
+% Make links footnotes instead of hotlinks:
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+$endif$
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+$if(numbersections)$
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+$if(verbatim-in-note)$
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+$if(lang)$
+\ifxetex
+  \usepackage{polyglossia}
+  \setmainlanguage{$mainlang$}
+\else
+  \usepackage[$lang$]{babel}
+\fi
+$endif$
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+
+\setcounter{tocdepth}{1} % Don't show so much in the TOC (LEU)
+
+\begin{document}
+\frontmatter % roman numerals (LEU)
+% Edits by LEU:
+\author{Larry Ullman}
+\title{The Yii Book\\
+\\
+\\
+\texttt{version 2.0}}
+\date{\today}
+
+% Add cover image here! LEU
+\begin{titlepage}
+\begin{center}
+\includegraphics{./src/YiiBookCover2ed.png}
+\end{center}
+%\HUGE{The Yii Book}\\[1cm]
+%\Large{Developing Web Applications Using the Yii PHP Framework}\\[5cm]
+% \Large{Larry Ullman}\\[5cm]
+%\vfill
+%{\large \today}
+\clearpage
+
+% Copyright page (LEU):
+\emph{The Yii Book} (2nd ed.) by Larry Ullman
+
+Self-published
+
+Find this book on the web at
+\href{https://larry.pub}{larry.pub}.
+
+Revision: 2.0
+
+Copyright © 2024 by Larry Ullman
+
+Technical Reviewer: Qiang Xue
+
+Technical Reviewer: Alexander Makarov
+
+Cover design very kindly provided by Paul Wilcox.
+
+\textbf{Notice of Rights}
+
+All rights reserved. No part of this book may be reproduced or
+transmitted in any form by any means, electronic, mechanical,
+photocopying, recording, or otherwise, without the prior written
+permission of the author.
+
+\textbf{Notice of Liability}
+
+The information in this book is distributed on an ``As Is'' basis,
+without warranty. While every precaution has been taken in the
+preparation of the book, the author shall not have any liability to any
+person or entity with respect to any loss or damage caused or alleged to
+be caused directly or indirectly by the instructions contained in this
+book or by the computer software and hardware products described in it.
+
+\textbf{Trademarks}
+
+MySQL is a registered trademark of Oracle in the United States and in
+other countries. Macintosh and Mac OS X are registered trademarks of
+Apple, Inc. Microsoft and Windows are registered trademarks of Microsoft
+Corp. Other product names used in this book may be trademarks of their
+own respective owners. Images of Web sites in this book are copyrighted
+by the original holders and are used with their kind permission. This
+book is not officially endorsed by nor affiliated with any of the above
+companies.
+
+Many of the designations used by manufacturers and sellers to
+distinguish their products are claimed as trademarks. Where those
+designations appear in this book, and the author was aware of a trademark
+claim, the designations appear as requested by the owner of the
+trademark. All other product names and services identified throughout
+this book are used in editorial fashion only and for the benefit of such
+companies with no intention of infringement of the trademark. No such
+use, or the use of any trade name, is intended to convey endorsement or
+other affiliation with this book.
+
+ISBN-13:
+
+ISBN-10:
+% End of copyright page (LEU).
+
+\clearpage
+
+% Dedication page (LEU):
+\begin{center}
+
+
+
+
+\Huge{This book is dedicated to:}\\[1cm]
+\Large{Qiang Xue, creator of the Yii framework; Alexander Makarov, and the whole Yii development team; and to the entire Yii community. Thanks to you all for making, embracing, and supporting such an excellent Web development tool.}
+\end{center}
+
+% End of dedication page (LEU).
+
+\end{titlepage}
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+$if(toc)$
+{
+\hypersetup{linkcolor=black}
+\tableofcontents
+}
+$endif$
+\mainmatter % Start normal page numbering
+$body$
+
+$if(natbib)$
+$if(biblio-files)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$biblio-files$}
+
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}
