@@ -6,6 +6,8 @@ The book is no longer actively maintained by the author.
 
 The book is not commercially available, but is now available for use under the [MIT license](./LICENSE). 
 
+You can download copies from the [output](./output/) directory.
+
 ## Build history
 
 The book was written in [Scrivener](https://www.literatureandlatte.com/scrivener/overview) and then exported in MulitMarkdown (.mmd) format. 
