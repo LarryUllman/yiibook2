@@ -1,10 +1,16 @@
 # "The Yii Book" (2nd edition) by Larry Ullman
 
-This is the source material for "The Yii Book" (2nd edition), written by Larry Ullman and published 2015-2024. 
+This is the source material for "The Yii Book" (2nd edition), written by Larry Ullman and published 2015-2024.
+
+The book is no longer actively maintained by the author.
+
+The book is not commercially available, but is now available for use under the [MIT license](./LICENSE). 
+
+## Build history
 
 The book was written in [Scrivener](https://www.literatureandlatte.com/scrivener/overview) and then exported in MulitMarkdown (.mmd) format. 
 
-Proper and ~decent PDF layout requires [LaTeX](https://www.latex-project.org). For the chapters to be created properly in LaTeX, this command was then run:
+Decent PDF layout requires [LaTeX](https://www.latex-project.org). For the chapters to be created properly in LaTeX, this command was then run:
 
 ```bash
 sed -i '.bak' -E 's/(FUNDAMENTAL CONCEPTS|STARTING A NEW APPLICATION|A MANUAL FOR YOUR YII SITE|INITIAL CUSTOMIZATIONS AND CODE GENERATIONS|WORKING WITH MODELS|WORKING WITH VIEWS|WORKING WITH CONTROLLERS|WORKING WITH DATABASES|WORKING WITH FORMS|MAINTAINING STATE|USER AUTHENTICATION AND AUTHORIZATION|WORKING WITH WIDGETS|USING EXTENSIONS|JAVASCRIPT AND JQUERY|INTERNATIONALIZATION|LEAVING THE BROWSER|IMPROVING PERFORMANCE|ADVANCED DATABASE ISSUES|EXTENDING YII|WORKING WITH THIRD-PARTY LIBRARIES|TESTING YOUR APPLICATIONS|CREATING A CMS|MAKING AN E-COMMERCE SITE|SHIPPING YOUR PROJECT) /# \1 #\
