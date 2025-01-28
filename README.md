@@ -6,7 +6,7 @@ The book is no longer actively maintained by the author.
 
 The book is not commercially available, but is now available for use under the [MIT license](./LICENSE). 
 
-You can download copies from the [output](./output/) directory.
+You can download copies from the [e-books](./e-books/) directory.
 
 ## Build history
 
